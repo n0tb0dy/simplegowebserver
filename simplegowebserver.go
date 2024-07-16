@@ -1,40 +1,30 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
-	"os"
+    "flag"
+    "fmt"
+    "log"
+    "net/http"
+    "os"
+    "strings"
 )
 
 func main() {
-	// Проверяем наличие аргументов командной строки
-	if len(os.Args) < 3 {
-		log.Fatal("Usage: simplegowebserver <port> <response message>")
-	}
+    port := flag.String("port", "8080", "Port to listen on")
+    message := flag.String("message", "Hello, World!", "Message to respond with")
+    showRequest := flag.Bool("m", false, "Show request details")
+    flag.Parse()
 
-	// Получаем порт и сообщение из аргументов командной строки
-	port := os.Args[1]
-	responseMessage := os.Args[2]
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        clientIP := r.RemoteAddr
+        fmt.Fprintln(w, *message)
+        if *showRequest {
+            fmt.Printf("Client IP: %s\nRequest: %s\n", clientIP, r)
+        } else {
+            fmt.Printf("Client IP: %s\n", clientIP)
+        }
+    })
 
-	// Обработчик запросов
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Логируем информацию о запросе
-		fmt.Printf("Received request from IP: %s\n", r.RemoteAddr)
-		fmt.Println("Request headers:")
-		for name, values := range r.Header {
-			for _, value := range values {
-				fmt.Printf("%s: %s\n", name, value)
-			}
-		}
-
-		// Отправляем ответ
-		fmt.Fprintln(w, responseMessage)
-	})
-
-	// Выводим информацию о запущенном сервере
-	fmt.Printf("Server is listening on port %s\n", port)
-
-	// Запускаем сервер
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+    fmt.Printf("Server is listening on port %s...\n", *port)
+    log.Fatal(http.ListenAndServe(":"+*port, nil))
 }

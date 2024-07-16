@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Go
       uses: actions/setup-go@v4
@@ -28,13 +28,13 @@ jobs:
     - name: Build
       run: |
         mkdir -p dist
-        GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/myapp-${{ matrix.goos }}-${{ matrix.goarch }} main.go
+        GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }} main.go
 
     - name: Archive artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
-        name: myapp-${{ matrix.goos }}-${{ matrix.goarch }}
-        path: dist/myapp-${{ matrix.goos }}-${{ matrix.goarch }}
+        name: simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }}
+        path: dist/simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }}
 
   release:
     needs: build
@@ -42,29 +42,29 @@ jobs:
 
     steps:
     - name: Download artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
-        name: myapp-linux-amd64
+        name: simplegowebserver-linux-amd64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
-        name: myapp-linux-arm64
+        name: simplegowebserver-linux-arm64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
-        name: myapp-darwin-amd64
+        name: simplegowebserver-darwin-amd64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
-        name: myapp-darwin-arm64
+        name: simplegowebserver-darwin-arm64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
-        name: myapp-windows-amd64
+        name: simplegowebserver-windows-amd64
         path: dist
 
     - name: Create Release
@@ -84,8 +84,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/myapp-linux-amd64
-        asset_name: myapp-linux-amd64
+        asset_path: dist/simplegowebserver-linux-amd64
+        asset_name: simplegowebserver-linux-amd64
         asset_content_type: application/octet-stream
 
     - name: Upload Linux arm64
@@ -94,8 +94,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/myapp-linux-arm64
-        asset_name: myapp-linux-arm64
+        asset_path: dist/simplegowebserver-linux-arm64
+        asset_name: simplegowebserver-linux-arm64
         asset_content_type: application/octet-stream
 
     - name: Upload Darwin amd64
@@ -104,8 +104,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/myapp-darwin-amd64
-        asset_name: myapp-darwin-amd64
+        asset_path: dist/simplegowebserver-darwin-amd64
+        asset_name: simplegowebserver-darwin-amd64
         asset_content_type: application/octet-stream
 
     - name: Upload Darwin arm64
@@ -114,8 +114,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/myapp-darwin-arm64
-        asset_name: myapp-darwin-arm64
+        asset_path: dist/simplegowebserver-darwin-arm64
+        asset_name: simplegowebserver-darwin-arm64
         asset_content_type: application/octet-stream
 
     - name: Upload Windows amd64
@@ -124,6 +124,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/myapp-windows-amd64
-        asset_name: myapp-windows-amd64.exe
+        asset_path: dist/simplegowebserver-windows-amd64
+        asset_name: simplegowebserver-windows-amd64.exe
         asset_content_type: application/octet-stream

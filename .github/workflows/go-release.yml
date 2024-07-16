@@ -18,10 +18,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4 # Обновление до последней версии
+      uses: actions/checkout@v4 # + Обновление до последней версии
 
     - name: Set up Go
-      uses: actions/setup-go@v5 # Обновление до последней версии
+      uses: actions/setup-go@v5 # + Обновление до последней версии
       with:
         go-version: '1.19'
 

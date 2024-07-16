@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	// Определение флагов командной строки
+	// РћРїСЂРµРґРµР»РµРЅРёРµ С„Р»Р°РіРѕРІ РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРё
 	port := flag.String("port", "8080", "Port to listen on")
 	message := flag.String("message", "Hello, World!", "Message to respond with")
 	monitor := flag.Bool("m", false, "Monitor and log client IP and request details")

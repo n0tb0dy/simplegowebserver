@@ -18,10 +18,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4 # Обновлено до последней версии
+      uses: actions/checkout@v4 # Последняя версия
 
     - name: Set up Go
-      uses: actions/setup-go@v5 # Обновлено до последней версии
+      uses: actions/setup-go@v5 # Последняя версия
       with:
         go-version: '1.19'
 
@@ -31,7 +31,7 @@ jobs:
         GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }} simplegowebserver.go
 
     - name: Archive artifact
-      uses: actions/upload-artifact@v4 # Обновлено до последней версии
+      uses: actions/upload-artifact@v4 # Последняя версия
       with:
         name: simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }}
         path: dist/simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }}
@@ -42,27 +42,27 @@ jobs:
 
     steps:
     - name: Download artifacts
-      uses: actions/download-artifact@v4 # Обновлено до последней версии
+      uses: actions/download-artifact@v4 # Последняя версия
       with:
         name: simplegowebserver-linux-amd64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v4 # Обновлено до последней версии
+      uses: actions/download-artifact@v4 # Последняя версия
       with:
         name: simplegowebserver-linux-arm64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v4 # Обновлено до последней версии
+      uses: actions/download-artifact@v4 # Последняя версия
       with:
         name: simplegowebserver-darwin-amd64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v4 # Обновлено до последней версии
+      uses: actions/download-artifact@v4 # Последняя версия
       with:
         name: simplegowebserver-darwin-arm64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v4 # Обновлено до последней версии
+      uses: actions/download-artifact@v4 # Последняя версия
       with:
         name: simplegowebserver-windows-amd64
         path: dist

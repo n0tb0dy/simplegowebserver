@@ -5,8 +5,6 @@ import (
     "fmt"
     "log"
     "net/http"
-    "os"
-    "strings"
 )
 
 func main() {

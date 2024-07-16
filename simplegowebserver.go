@@ -1,4 +1,4 @@
-package main
+package simplegowebserver
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 func main() {
 	// Проверяем наличие аргументов командной строки
 	if len(os.Args) < 3 {
-		log.Fatal("Usage: go run main.go <port> <response message>")
+		log.Fatal("Usage: simplegowebserver <port> <response message>")
 	}
 
 	// Получаем порт и сообщение из аргументов командной строки

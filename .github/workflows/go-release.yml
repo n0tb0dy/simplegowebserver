@@ -31,7 +31,7 @@ jobs:
         GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }} main.go
 
     - name: Archive artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }}
         path: dist/simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }}
@@ -42,27 +42,27 @@ jobs:
 
     steps:
     - name: Download artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: simplegowebserver-linux-amd64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: simplegowebserver-linux-arm64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: simplegowebserver-darwin-amd64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: simplegowebserver-darwin-arm64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: simplegowebserver-windows-amd64
         path: dist
@@ -78,12 +78,15 @@ jobs:
         draft: false
         prerelease: false
 
+    - name: Set environment file
+      run: echo "UPLOAD_URL=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
+
     - name: Upload Linux amd64
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ env.UPLOAD_URL }}
         asset_path: dist/simplegowebserver-linux-amd64
         asset_name: simplegowebserver-linux-amd64
         asset_content_type: application/octet-stream
@@ -93,7 +96,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ env.UPLOAD_URL }}
         asset_path: dist/simplegowebserver-linux-arm64
         asset_name: simplegowebserver-linux-arm64
         asset_content_type: application/octet-stream
@@ -103,7 +106,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ env.UPLOAD_URL }}
         asset_path: dist/simplegowebserver-darwin-amd64
         asset_name: simplegowebserver-darwin-amd64
         asset_content_type: application/octet-stream
@@ -113,7 +116,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ env.UPLOAD_URL }}
         asset_path: dist/simplegowebserver-darwin-arm64
         asset_name: simplegowebserver-darwin-arm64
         asset_content_type: application/octet-stream
@@ -123,7 +126,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ env.UPLOAD_URL }}
         asset_path: dist/simplegowebserver-windows-amd64
         asset_name: simplegowebserver-windows-amd64.exe
         asset_content_type: application/octet-stream

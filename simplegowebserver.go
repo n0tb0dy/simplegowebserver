@@ -1,4 +1,4 @@
-package simplegowebserver
+package main
 
 import (
 	"fmt"

@@ -105,4 +105,42 @@ jobs:
         asset_name: simplegowebserver-linux-amd64
         asset_content_type: application/octet-stream
 
-    - name: Upload Linux
+    - name: Upload Linux arm64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ env.UPLOAD_URL }}
+        asset_path: dist/simplegowebserver-linux-arm64
+        asset_name: simplegowebserver-linux-arm64
+        asset_content_type: application/octet-stream
+
+    - name: Upload Darwin amd64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ env.UPLOAD_URL }}
+        asset_path: dist/simplegowebserver-darwin-amd64
+        asset_name: simplegowebserver-darwin-amd64
+        asset_content_type: application/octet-stream
+
+    - name: Upload Darwin arm64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ env.UPLOAD_URL }}
+        asset_path: dist/simplegowebserver-darwin-arm64
+        asset_name: simplegowebserver-darwin-arm64
+        asset_content_type: application/octet-stream
+
+    - name: Upload Windows amd64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ env.UPLOAD_URL }}
+        asset_path: dist/simplegowebserver-windows-amd64
+        asset_name: simplegowebserver-windows-amd64.exe
+        asset_content_type: application/octet-stream

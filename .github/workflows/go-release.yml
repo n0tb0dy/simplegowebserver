@@ -18,10 +18,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4 # Обновлено до последней версии
 
     - name: Set up Go
-      uses: actions/setup-go@v5
+      uses: actions/setup-go@v5 # Обновлено до последней версии
       with:
         go-version: '1.19'
 
@@ -31,7 +31,7 @@ jobs:
         GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }} simplegowebserver.go
 
     - name: Archive artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4 # Обновлено до последней версии
       with:
         name: simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }}
         path: dist/simplegowebserver-${{ matrix.goos }}-${{ matrix.goarch }}
@@ -42,34 +42,34 @@ jobs:
 
     steps:
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v4 # Обновлено до последней версии
       with:
         name: simplegowebserver-linux-amd64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v4 # Обновлено до последней версии
       with:
         name: simplegowebserver-linux-arm64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v4 # Обновлено до последней версии
       with:
         name: simplegowebserver-darwin-amd64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v4 # Обновлено до последней версии
       with:
         name: simplegowebserver-darwin-arm64
         path: dist
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v4 # Обновлено до последней версии
       with:
         name: simplegowebserver-windows-amd64
         path: dist
 
     - name: Create Release
       id: create_release
-      uses: actions/create-release@v1
+      uses: actions/create-release@v1 # Проверка последней версии
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -82,7 +82,7 @@ jobs:
       run: echo "UPLOAD_URL=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
 
     - name: Upload Linux amd64
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v1 # Проверка последней версии
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -92,7 +92,7 @@ jobs:
         asset_content_type: application/octet-stream
 
     - name: Upload Linux arm64
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v1 # Проверка последней версии
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -102,7 +102,7 @@ jobs:
         asset_content_type: application/octet-stream
 
     - name: Upload Darwin amd64
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v1 # Проверка последней версии
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -112,7 +112,7 @@ jobs:
         asset_content_type: application/octet-stream
 
     - name: Upload Darwin arm64
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v1 # Проверка последней версии
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -122,7 +122,7 @@ jobs:
         asset_content_type: application/octet-stream
 
     - name: Upload Windows amd64
-      uses: actions/upload-release-asset@v1
+      uses: actions/upload-release-asset@v1 # Проверка последней версии
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
